@@ -30,86 +30,87 @@ Variabel environment penting:
 
 ## CI
 Workflow CI (`.github/workflows/ci.yml`) menjalankan lint dan build pada push/PR. Jika Anda menambahkan test yang membutuhkan secrets (mis. `INFLUX_TOKEN`), tambahkan secrets melalui GitHub Settings → Secrets → Actions dan update workflow untuk memetakan `secrets.INFLUX_TOKEN` ke environment variable.
-# ui_page_mdp
+ # ui_page_mdp
 
-Overview
---------
-`ui_page_mdp` is a Next.js-based dashboard for monitoring electricity consumption. The application queries InfluxDB and presents aggregated energy usage and cost calculations.
+Deskripsi singkat
+-----------------
+`ui_page_mdp` adalah dashboard berbasis Next.js untuk memantau konsumsi listrik. Aplikasi melakukan query ke InfluxDB lalu menyajikan agregasi penggunaan energi dan perhitungan biaya.
 
-Prerequisites
--------------
-- Node.js 18 or later
-- npm (or compatible package manager)
+Prasyarat
+---------
+- Node.js 18 atau lebih baru
+- npm
 
-Quick Start
+Mulai cepat
 -----------
-1. Copy environment template and populate secrets (do not commit secrets):
+1. Salin file contoh environment dan isi nilai sensitif pada `.env.local` (jangan commit nilai sensitif):
 
 ```bash
 cp .env.example .env.local
-# edit .env.local and set INFLUX_TOKEN and other values
+# edit .env.local dan atur INFLUX_TOKEN serta variabel lain
 ```
 
-2. Install dependencies and start development server:
+2. Instal dependensi dan jalankan server pengembangan:
 
 ```bash
 npm install
 npm run dev
 ```
 
-3. Build for production:
+3. Membangun untuk produksi:
 
 ```bash
 npm run build
 npm start
 ```
 
-Configuration
--------------
-Use `.env.local` to configure runtime values. Key variables used by the application:
+Konfigurasi
+-----------
+Konfigurasi runtime disimpan di `.env.local`. Variabel utama:
 
-- `INFLUX_URL` — InfluxDB base URL (e.g. `http://influx.example:8086`)
-- `INFLUX_TOKEN` — API token for InfluxDB (sensitive; store in GitHub Secrets for CI)
-- `INFLUX_ORG` — Influx organization
-- `INFLUX_BUCKET` — Bucket name used by queries (e.g. `OtomasiEng`)
-- `INFLUX_MEASUREMENT` — Measurement name used by queries (e.g. `pm2220`)
-- `NEXT_PUBLIC_GRAFANA_URL` — Public Grafana panel URL (optional)
+- `INFLUX_URL` — URL InfluxDB (mis. `http://influx.example:8086`)
+- `INFLUX_TOKEN` — token akses InfluxDB (rahasia)
+- `INFLUX_ORG` — organisasi Influx
+- `INFLUX_BUCKET` — nama bucket (mis. `OtomasiEng`)
+- `INFLUX_MEASUREMENT` — measurement yang dipakai (mis. `pm2220`)
+- `NEXT_PUBLIC_GRAFANA_URL` — URL publik panel Grafana (opsional)
 
-Project structure (important files)
-----------------------------------
-- `app/page.js` — Client-side dashboard UI
-- `app/api/listrik/route.js` — Server route that queries InfluxDB
-- `test-query.js` — Local helper to run InfluxDB queries (uses environment variables)
-- `.env.example` — Example environment variables (safe to commit)
-- `.github/workflows/ci.yml` — CI workflow for lint + build
+Struktur proyek (file penting)
+-----------------------------
+- `app/page.js` — UI dashboard (client-side)
+- `app/api/listrik/route.js` — API route server untuk query InfluxDB
+- `test-query.js` — skrip lokal untuk menguji query InfluxDB (menggunakan env vars)
+- `.env.example` — template environment yang aman untuk di-commit
+- `.github/workflows/ci.yml` — pipeline CI (lint + build)
+- `public/` — aset statis (ikon/logo)
 
-Scripts
--------
-- `npm run dev` — Start development server
-- `npm run build` — Build production assets
-- `npm start` — Run production server (after `npm run build`)
-- `npm run lint` — Run ESLint
-- `npm test` — Placeholder test script (no automated tests by default)
+Perintah (scripts)
+------------------
+- `npm run dev` — jalankan server pengembangan
+- `npm run build` — buat build produksi
+- `npm start` — jalankan build produksi
+- `npm run lint` — jalankan ESLint
+- `npm test` — skrip placeholder (tidak ada test otomatis sekarang)
 
-Continuous Integration
+Integrasi Kontinu (CI)
 ----------------------
-The repository contains a GitHub Actions workflow that runs `lint` and `build` on push and pull requests. If you add tests that require secrets (for example, integration tests that access InfluxDB), add those secrets in GitHub repository settings and update the workflow to expose them as environment variables.
+Pipeline GitHub Actions menjalankan `lint` dan `build` pada push/PR. Jika menambahkan tes yang memerlukan akses ke InfluxDB, simpan rahasia (mis. `INFLUX_TOKEN`) di GitHub Secrets dan peta ke environment di workflow.
 
-Security and Secrets
---------------------
-- Do not commit secret values. Use `.env.example` to document required variables.
-- If secrets were accidentally committed, rotate them immediately and remove them from git history with a history-rewriting tool.
+Keamanan
+--------
+- Jangan commit nilai rahasia. Gunakan `.env.example` sebagai dokumentasi variabel.
+- Jika rahasia terlanjur ter-commit, segera rotasi kunci dan hapus dari riwayat git (contoh: `git filter-repo` atau BFG).
 
-Contributing
-------------
-- Create pull requests against `main`.
-- Add tests for new behavior.
-- Run `npm run lint` and `npm run build` before opening a PR.
+Kontribusi
+----------
+- Buat pull request ke cabang `main`.
+- Jalankan `npm run lint` dan `npm run build` sebelum PR.
+- Sertakan tes untuk fitur baru bila memungkinkan.
 
-License
+Lisensi
 -------
-Add a `LICENSE` file to indicate project licensing. If unspecified, the repository is considered private.
+Tambahkan file `LICENSE` untuk menentukan lisensi proyek.
 
-Contact
--------
-For questions about this repository, open an issue or contact the maintainer.
+Kontak
+------
+Buka issue di repositori untuk pertanyaan atau catat kontak maintainer.
