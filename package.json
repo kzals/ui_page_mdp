@@ -2,11 +2,13 @@
   "name": "ui_page_mdp",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "@influxdata/influxdb-client": "^1.35.0",

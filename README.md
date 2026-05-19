@@ -26,10 +26,10 @@ Variabel environment penting:
 - `npm run build` — build produksi
 - `npm start` / `next start` — jalankan build produksi
 - `npm run lint` — jalankan ESLint
-- `npm test` — jalankan test
+- `npm test` — placeholder (tidak ada test otomatis saat ini)
 
 ## CI
-Workflow CI (`.github/workflows/ci.yml`) menjalankan lint, test, dan build pada push/PR.
+Workflow CI (`.github/workflows/ci.yml`) menjalankan lint dan build pada push/PR. Jika Anda menambahkan test yang membutuhkan secrets (mis. `INFLUX_TOKEN`), tambahkan secrets melalui GitHub Settings → Secrets → Actions dan update workflow untuk memetakan `secrets.INFLUX_TOKEN` ke environment variable.
 
 ## Kontribusi
 - Tambahkan `CONTRIBUTING.md` jika perlu.
