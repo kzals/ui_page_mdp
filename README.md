@@ -64,17 +64,3 @@ Integrasi Kontinu (CI)
 ----------------------
 Pipeline GitHub Actions menjalankan `lint` dan `build` pada push/PR. Jika menambahkan tes yang memerlukan akses ke InfluxDB, simpan rahasia (mis. `INFLUX_TOKEN`) di GitHub Secrets dan peta ke environment di workflow.
 
-Keamanan
---------
-- Jangan commit nilai rahasia. Gunakan `.env.example` sebagai dokumentasi variabel.
-- Jika rahasia terlanjur ter-commit, segera rotasi kunci dan hapus dari riwayat git (contoh: `git filter-repo` atau BFG).
-
-Kontribusi
-----------
-- Buat pull request ke cabang `main`.
-- Jalankan `npm run lint` dan `npm run build` sebelum PR.
-- Sertakan tes untuk fitur baru bila memungkinkan.
-
-Lisensi
--------
-Tambahkan file `LICENSE` untuk menentukan lisensi proyek.
